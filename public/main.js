@@ -1,8 +1,10 @@
-import { Creations } from "../data/data.js";
+import { Creations, loadFromStorage } from '../data/data.js';
 
-import '../data/backend-practice.js';
+loadFromStorage(renderCreations);
 
-const mainHTML = `
+function renderCreations() {
+
+document.body.innerHTML =`
 <div class="grid-container">
     <div class="background-image-container">
         <img src="image/f18c62bc-a19a.jpg" alt="katapathpawra Logo" class="background-image">
@@ -12,39 +14,35 @@ const mainHTML = `
     </header>
     <nav class="navigator-grid">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="about.html">About</a></li>
         </ul>
     </nav>
     <main class="main-content">
         <h2 class="h2-size">කැටපත් පවුර</h2>
-        
 
     <section class="home-container"></section>
 
-        <section id="contact" class="creating-gride">
-            <h2>ඔබේ නිර්මානය ලියා පල කරන්න...</h2>
-            <textarea class="text-area" id="js-creation-trace"> "නිර්මානාත්මක ඔබේ නිර්මානය ලියා මෙහි පලකල හැක... "
-                 Sharing your creative ideas and publishing them for others to read is something you can do here!. 
+    <section id="contact" class="creating-gride">
+    <h2>ඔබේ නිර්මානය ලියා පල කරන්න...</h2>
+        <textarea class="text-area" id="js-creation-trace"> "නිර්මානාත්මක ඔබේ නිර්මානය ලියා මෙහි පලකල හැක... "
 
-    (erase this text area / ඉහත පෙළ මකන්න. )
-                </textarea>
-            <button class="submit-button" type="submit">Submit</button>
-        </section>
+        Sharing your creative ideas and publishing them for others to read is something you can do here!. 
+
+        (Please erase this text area / ඉහත පෙළ මකන්න. )
+        </textarea>
+    <button class="submit-button" type="submit">Submit</button>
+    </section>
     </main>
     <footer class="footer-grid">
-        <p>&copy; 2025 katapathpawra.</p>
+        <p>&copy; 2025 katapathpawra.org</p>
     </footer>
 </div>`;
+}
+export const creationsInstance = new Creations('userCreations');
 
-document.body.innerHTML = mainHTML;
-
-const creationsInstance = new Creations('userCreations');
 const severData = creationsInstance.getAllCreations();
 
 let UserCreated = [...severData];
-
 
 document.querySelector('.submit-button').addEventListener('click', () => {
     const userCreation = document.getElementById('js-creation-trace').value;
@@ -55,15 +53,15 @@ document.querySelector('.submit-button').addEventListener('click', () => {
     } else {
         alert('Please write something before submitting.');
     }
- document.querySelector('.home-container').innerHTML = UserCreated.map(item => `<p class="js-creation">${item}</p>`).join('');  
-
-    creationsInstance.addCreation(userCreation);
-
-  setTimeout(() => {
-    location.reload();
-  }, 200);
+    setTimeout();
+    return creationsInstance.addCreation(userCreation);
 
 });
  document.querySelector('.home-container').innerHTML = UserCreated.map(item => `<p class="js-creation">${item}</p>`).join('');  
 
-// localStorage.removeItem('userCreations');
+function setTimeout() {
+    location.reload();
+  } 2000;
+
+
+//localStorage.removeItem('userCreations');

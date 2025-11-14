@@ -1,3 +1,7 @@
+import {creationsInstance} from '../public/main.js ';
+
+
+
 export class Creations {
   creations;
   #localStorageKey;
@@ -6,10 +10,11 @@ export class Creations {
     this.#localStorageKey = localStorageKey;
     this.loadFromStorage();
   }
+  
   loadFromStorage() {
     this.creations = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
   }
-
+  
   addCreation(creation) {
     this.creations.push(creation);
     this.saveToStorage();
@@ -24,4 +29,14 @@ export class Creations {
   }
 }
 
-//console.log(Creations);
+export function loadFromStorage(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    Creations.creations = JSON.parse(xhr.response).getItems(localStorage) || [];
+    });
+    fun();
+    xhr.open('GET', 'https://katapathpawra.org');
+    xhr.send();
+  }
+      
