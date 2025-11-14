@@ -64,4 +64,4 @@ function setTimeout() {
   } 2000;
 
 
-localStorage.removeItem('userCreations');
+//localStorage.removeItem('userCreations');
